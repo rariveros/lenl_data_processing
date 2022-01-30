@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.interpolate import interp1d
 from procesos import *
-from visualizacion import *
 
 if __name__ == '__main__':
 
@@ -38,7 +37,7 @@ if __name__ == '__main__':
     datos_path = 'D:\mnustes_science\experimental_data'
     carpeta = select_directory(datos_path)
     [X, T, Z] = cargar_txt(carpeta, '', X='X', T='T', Z='Z')
-    fps = 100
+    fps = 600
     force_freq = 15.22
     strobo = []
     time = []
@@ -52,8 +51,13 @@ if __name__ == '__main__':
     strobo = np.array(strobo)
     time = np.array(time)
     print(len(Bs_max), len(time))
-    #strobo = filtro_superficie(strobo, 4, 'Y')
-    visualizacion(X, np.arange(len(time)), strobo, tipo='colormap', guardar='si', path=carpeta,
-                  file='', nombre='strobo_plot', cmap='seismic', vmin=-20, vzero=0, vmax=20)
+    #STROBO = filtro_superficie(STROBO, 4, 'Y')
+    pcm = plt.pcolormesh(X, np.arange(len(time)), strobo, cmap='seismic', shading='auto')
+    cbar = plt.colorbar(pcm, shrink=1)
+    cbar.set_label('$\eta(x, t)$', rotation=0, size=20, labelpad=-27, y=1.1)
+    plt.xlim([X[0], X[-1]])
+    plt.xlabel('$x$', size='20')
+    plt.ylabel('$t$', size='20')
+    plt.grid(linestyle='--', alpha=0.5)
     plt.scatter(Bs_max, np.arange(len(time)), s=0.5, c='black')
     plt.show()

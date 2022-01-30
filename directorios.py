@@ -1,5 +1,4 @@
 from procesos import *
-from visualizacion import *
 
 disco = 'E'
 

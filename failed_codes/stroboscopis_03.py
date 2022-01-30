@@ -1,5 +1,4 @@
 from procesos import *
-from visualizacion import *
 
 if __name__ == '__main__':
 
@@ -80,7 +79,7 @@ if __name__ == '__main__':
         st_dynamic_np = np.array(st_dynamic)
         return st_dynamic_np
 
-    datos_path = 'D:\mnustes_science\experimental_data'
+    datos_path = 'F:\mnustes_science\experimental_data'
     carpeta = select_directory(datos_path)
     #Z = zero_fix(carpeta, 20, 'zero')
 
@@ -92,9 +91,14 @@ if __name__ == '__main__':
     #plt.plot(J, I, 'o', color='black', markersize=1)
     #plt.show()
 
-    upper_window = 690
-    lower_window = 714
+    upper_window = 700
+    lower_window = 850
     STROBO = stroboscopic(X, T, Z, min_elements, 80, 'min', [lower_window, upper_window])
-    visualizacion(X, np.arange(len(STROBO[:, 0])), STROBO, tipo='colormap', guardar='si', path=carpeta,
-                  file='', nombre='stroboscopic_new', cmap='seismic', vmin=-20, vzero=0, vmax=20)
+    pcm = plt.pcolormesh(X, np.arange(len(STROBO[:, 0])), STROBO, cmap='jet', shading='auto')
+    cbar = plt.colorbar(pcm, shrink=1)
+    cbar.set_label('$\eta(x, t)$', rotation=0, size=20, labelpad=-27, y=1.1)
+    plt.xlim([X[0], X[-1]])
+    plt.xlabel('$x$', size='20')
+    plt.ylabel('$t$', size='20')
+    plt.grid(linestyle='--', alpha=0.5)
     plt.show()

@@ -1,16 +1,15 @@
 from directorios import *
 from procesos import *
-from visualizacion import *
 
 
 if __name__ == '__main__':
     #PARAMETROS INICIALES
     zero = 'no'
     sigma = 'fixed'
-    project_file = 'ayudantia_2022'
+    project_file = 'ayudantia_2022/4_triangulos/bifurcacion_secador'
 
     #DETECCION DE CONTORNOS
-    X, T, PHI, carpeta = deteccion_contornos_new(disco, zero, sigma, file_name=project_file)
+    X, T, PHI, carpeta = deteccion_contornos_new('F', zero, sigma, file_name=project_file)
 
     #NIVELACION DEL CERO
     Z = nivel_mean(PHI, X, T)

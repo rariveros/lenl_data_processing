@@ -11,6 +11,7 @@ from scipy.interpolate import interp1d
 from scipy.optimize import curve_fit
 from scipy.stats import linregress
 from scipy.fft import fft, fftfreq, fftshift
+from scipy.signal import hilbert, chirp
 from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.colors import TwoSlopeNorm
@@ -21,7 +22,6 @@ import time
 import winsound
 
 from directorios import *
-from visualizacion import *
 
 
 
@@ -214,14 +214,14 @@ def deteccion_contornos_new(disco, zero, sigma, **kwargs):
     root.withdraw()
     if zero == 'si':
         zero_file = filedialog.askdirectory(parent=root,
-                                                        initialdir="E:\mnustes_science",
+                                                        initialdir=disco + ":\mnustes_science",
                                                         title='Seleccione la carpeta del cero')
         if not zero_file:
             sys.exit('No se seleccionó ningún archivo')
         zero_name = os.path.basename(zero_file)
 
     detection_file = filedialog.askdirectory(parent=root,
-                                             initialdir="E:\mnustes_science",
+                                             initialdir=disco + ":\mnustes_science",
                                              title='Seleccione la carpeta para detección')
     if not detection_file:
         sys.exit('No se seleccionó ningún archivo')
@@ -255,8 +255,8 @@ def deteccion_contornos_new(disco, zero, sigma, **kwargs):
 
 def auto_canny(image, sigma):
     if sigma == 'fixed':
-        lower = 100
-        upper = 200
+        lower = 30
+        upper = 180
     else:
         v = np.median(image)
         lower = int(max(0, (1.0 - sigma) * v))
@@ -267,7 +267,7 @@ def auto_canny(image, sigma):
 
 def deteccion_jpg(file_i, file_o, REC, sigma):
     IMGs = os.listdir(file_i)  # lista de nombres de archivos en la carpeta indicada
-    im = cv2.imread(file_i + '/cam000000.jpg')
+    im = cv2.imread(file_i + '/Img000000.jpg')
     rec = list(REC)
     imCrop = im[rec[1]:(rec[1] + rec[3]), rec[0]:(rec[0] + rec[2])]
     imBlur = cv2.GaussianBlur(imCrop, (7, 7), 0)
