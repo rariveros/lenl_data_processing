@@ -13,6 +13,7 @@ from scipy.stats import linregress
 from scipy.fft import fft, fftfreq, fftshift
 from scipy.signal import hilbert, chirp
 from matplotlib import pyplot as plt
+from matplotlib.pyplot import figure
 from matplotlib.animation import FuncAnimation
 from matplotlib.colors import TwoSlopeNorm
 from tkinter import *

@@ -32,3 +32,6 @@ if __name__ == '__main__':
     plt.grid(linestyle='--', alpha=0.5)
     plt.savefig(carpeta + '/module_spacetime.png')
     plt.close()
+
+
+
