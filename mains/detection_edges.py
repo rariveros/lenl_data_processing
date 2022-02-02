@@ -34,7 +34,7 @@ if __name__ == '__main__':
     img = cv2.imread(img_path + '/' + IMGs[0], 0)
     rows, cols = img.shape
     for i in range(len(IMGs) - 1):
-        print('Processing IMG ' + str(i))
+        print('Processing Img ' + str(i))
         x = range(len(Z[0, :]))
         im = cv2.imread(img_path + '/' + IMGs[i])
         im_crude = cv2.imread(crude_img_path + '/' + IMGs[i])
