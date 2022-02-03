@@ -9,9 +9,9 @@ if __name__ == '__main__':
     def f(x, A, c, noise):
         return A * (((x - c) + ((x - c) ** 2 + 2 * noise) ** 0.5) / 2) ** 0.5
 
-    gammas_np = genfromtxt('E:/mnustes_science/experimental_data/faraday_drift_03/dvelocities_info/gammas.csv', delimiter=',')
-    velocities_np = genfromtxt('E:/mnustes_science/experimental_data/faraday_drift_03/dvelocities_info/velocities.csv', delimiter=',')
-    velocities_error_np = genfromtxt('E:/mnustes_science/experimental_data/faraday_drift_03/dvelocities_info/velocities_err.csv',delimiter=',')
+    gammas_np = genfromtxt('E:/mnustes_science/experimental_data/faraday_drift_03/dvelocities_info/velocity_processed/gammas.csv', delimiter=',')
+    velocities_np = genfromtxt('E:/mnustes_science/experimental_data/faraday_drift_03/dvelocities_info/velocity_processed/velocities.csv', delimiter=',')
+    velocities_error_np = genfromtxt('E:/mnustes_science/experimental_data/faraday_drift_03/dvelocities_info/velocity_processed/velocities_err.csv',delimiter=',')
 
 
     popt, pcov = curve_fit(f, gammas_np, velocities_np, bounds=[(0, 0.6, 0), (10, 0.683, 10)])
@@ -43,7 +43,7 @@ if __name__ == '__main__':
         r'$\mathrm{\eta}=%.4f$' % (noise,)))
 
     plt.xlabel('$\Gamma_0$', size=15)
-    plt.ylabel('$\langle v \\rangle$', size=15)
+    plt.ylabel('$\langle v \\rangle$ (mm/s)', size=15)
     plt.errorbar(gammas_np, velocities_np, yerr=velocities_error_np, marker='o', ls='', capsize=5, capthick=1,
                  ecolor='k', color='k')
     plt.plot(x_grid_antierror, velocity_fitted_np, '--', linewidth='2', c='r', label='Noise included')
@@ -58,5 +58,6 @@ if __name__ == '__main__':
     # place a text box in upper left in axes coords
     ax.text(0.05, 0.95, textstr, transform=ax.transAxes, fontsize=14,
             verticalalignment='top', bbox=props)
-
+    plt.savefig('E:/mnustes_science/experimental_data/faraday_drift_03/dvelocities_info/velocity_processed/fit')
     plt.show()
+    plt.close()
