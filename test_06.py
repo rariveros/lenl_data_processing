@@ -3,6 +3,7 @@ from procesos import *
 
 
 if __name__ == '__main__':
+
     ### Definiendo parametros y eligiendo carpeta a detectar ###
     file = 'C:/Users/rariv/Desktop/test'
     IMG_names = os.listdir(file)
@@ -42,7 +43,10 @@ if __name__ == '__main__':
     ### Se genera un operador similar a Dx sparse y un vector contador ###
     D = sparse_D(Ny)
     enumerate_array = np.arange(Ny)[::-1]
-
+    # Midiendo tiempo inicial
+    now = datetime.datetime.now()
+    print('Hora de Inicio: ' + str(now.hour) + ':' + str(now.minute) + ':' + str(now.second))
+    time_init = time.time()
     ### Iteración de detección ###
     Z = []
     for i in range(N_img):
@@ -57,6 +61,12 @@ if __name__ == '__main__':
             position = np.dot(enumerate_array, Dy)
             Z_i.append(position)
         Z.append(Z_i)
+
+    # Midiendo tiempo final
+    now = datetime.datetime.now()
+    print('Hora de Término: ' + str(now.hour) + ':' + str(now.minute) + ':' + str(now.second))
+    time_fin = time.time()
+    print(str(time_fin - time_init) + ' seg')
 
     ### Definiendo espacio-temporal en numpy en pixeles y mm ##
     X = np.arange(Nx)
