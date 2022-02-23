@@ -696,6 +696,39 @@ def ajuste_altura(X, T, Z, threshold, n):
     return Z_ajustado
 
 
+def sparse_D(Nx):
+    data = np.ones((2, Nx))
+    data[1] = -data[1]
+    diags = [1, 0]
+    D2 = sparse.spdiags(data, diags, Nx, Nx)
+    D2 = sparse.lil_matrix(D2)
+    D2[-1, -1] = 0
+    return D2
+
+def pix_to_mm(img, scale):
+    def click_event(event, x, y, flags, params):
+        if event == cv2.EVENT_LBUTTONDOWN:
+            points_i = (x, y)
+            points.append(points_i)
+            # displaying the coordinates
+            # on the image window
+            cv2.circle(img, (x, y), radius=4, color=(0, 0, 255), thickness=-1)
+            cv2.imshow('image', img)
+            if len(points) >= 2:
+                cv2.line(img, (points[-1]), (points[-2]), (0, 255, 0), thickness=2, lineType=8)
+                cv2.circle(img, (points[-1]), radius=4, color=(0, 0, 255), thickness=-1)
+                cv2.circle(img, (points[-2]), radius=4, color=(0, 0, 255), thickness=-1)
+            cv2.imshow('image', img)
+
+    cv2.imshow('image', img)
+    points = []
+    cv2.setMouseCallback('image', click_event)
+    cv2.waitKey(0)
+    pix_to_mm = (40 / np.abs(points[-1][0] - points[-2][0])) / scale
+    cv2.destroyAllWindows()
+    return pix_to_mm
+
+
 ######################  SIMULACIONES   ######################
 def iterative_bigaussian_adimensional(iteration_1, iteration_2, alpha, beta, gamma, mu, nu, sigma_forcing_1, sigma_forcing_2, distancia, fase, L, dx, dt, T_final):
     eq = 'pndls'
@@ -824,3 +857,4 @@ def iterative_bigaussian_adimensional(iteration_1, iteration_2, alpha, beta, gam
             distancia = iteration_1[1]
         elif iteration_1[0] == 'fase':
             fase = iteration_1[1]
+
