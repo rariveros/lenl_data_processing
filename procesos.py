@@ -12,6 +12,7 @@ from scipy.optimize import curve_fit
 from scipy.stats import linregress
 from scipy.fft import fft, fftfreq, fftshift
 from scipy.signal import hilbert, chirp
+import scipy.sparse as sparse
 from matplotlib import pyplot as plt
 from matplotlib.pyplot import figure
 from matplotlib.animation import FuncAnimation
@@ -21,6 +22,7 @@ import tkinter as tk
 from tkinter import filedialog
 import time
 import winsound
+
 
 from directorios import *
 
