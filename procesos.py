@@ -710,8 +710,6 @@ def pix_to_mm(img, scale):
         if event == cv2.EVENT_LBUTTONDOWN:
             points_i = (x, y)
             points.append(points_i)
-            # displaying the coordinates
-            # on the image window
             cv2.circle(img, (x, y), radius=4, color=(0, 0, 255), thickness=-1)
             cv2.imshow('image', img)
             if len(points) >= 2:

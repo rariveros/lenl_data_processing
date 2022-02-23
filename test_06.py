@@ -8,7 +8,7 @@ if __name__ == '__main__':
     IMG_names = os.listdir(file)
     N_img = len(IMG_names)
     resize_scale = 0.5
-    thresh = 50
+    thresh = 48
 
     ### Abriendo imagen de referencia para determinar la región de interes (ROI) y la conversion a mm ###
     root = tk.Tk()
