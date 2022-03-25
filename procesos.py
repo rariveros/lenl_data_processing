@@ -23,6 +23,7 @@ from tkinter import filedialog
 import time
 import winsound
 import datetime
+from matplotlib.colors import DivergingNorm
 
 
 from directorios import *
@@ -723,7 +724,11 @@ def pix_to_mm(img, scale):
     points = []
     cv2.setMouseCallback('image', click_event)
     cv2.waitKey(0)
-    pix_to_mm = (40 / np.abs(points[-1][0] - points[-2][0])) / scale
+    pix_to_mm = (40 / np.abs(points[-1][0] - points[-2][0])) * scale
+    print('x_2=' + str(np.abs(points[-1][0])))
+    print('x_1=' + str(np.abs(points[-2][0])))
+    print('y_2=' + str(np.abs(points[-1][1])))
+    print('y_1=' + str(np.abs(points[-2][1])))
     cv2.destroyAllWindows()
     return pix_to_mm
 
