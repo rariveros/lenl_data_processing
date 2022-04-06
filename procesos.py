@@ -24,6 +24,8 @@ import time
 import winsound
 import datetime
 from matplotlib.colors import DivergingNorm
+from scipy.signal import hilbert, chirp
+from numpy import unravel_index
 
 
 from directorios import *

@@ -3,11 +3,16 @@ from procesos import *
 
 
 if __name__ == "__main__":
-    a = 'F:/mnustes_science/experimental_data/ayudantia_2022/4_triangulos/bifurcacion_secador/a=6.3_f=14.9'
-    X = np.loadtxt(a + '/X.txt', delimiter=',')
-    X_mm = np.loadtxt(a + '/X_mm.txt', delimiter=',')
-    T_s = np.loadtxt(a + '/T.txt', delimiter=',')
-    Z_mm = np.loadtxt(a + '/Z_mm.txt', delimiter=',')
+    disco = 'F'
+    initial_dir_data = str(disco) + ':/mnustes_science/experimental_data'
+    root = tk.Tk()
+    root.withdraw()
+    directory = filedialog.askdirectory(parent=root, initialdir=initial_dir_data, title='Elección de carpeta')
+
+    X_mm = np.loadtxt(directory + '/X_mm.txt', delimiter=',')
+    T_s = np.loadtxt(directory + '/T_s.txt', delimiter=',')
+    Z_mm = np.loadtxt(directory + '/Z_mm.txt', delimiter=',')
+
     norm = TwoSlopeNorm(vmin=np.amin(Z_mm), vcenter=0, vmax=np.amax(Z_mm))
     pcm = plt.pcolormesh(X_mm, T_s, Z_mm, norm=norm, cmap='seismic', shading='auto')
     cbar = plt.colorbar(pcm, shrink=1)

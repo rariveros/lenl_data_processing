@@ -1,12 +1,10 @@
-import os
-
 from directorios import *
 from procesos import *
 
 
 if __name__ == "__main__":
     disco = 'F'
-    project_file = 'ayudantia_2022/4_triangulos/medidas'
+    project_file = '/ayudantia_2022/gaussiano/medidas'
     initial_dir_img = str(disco) + ':/mnustes_science/images'
     initial_dir_data = str(disco) + ':/mnustes_science/experimental_data'
     root = tk.Tk()
@@ -18,7 +16,7 @@ if __name__ == "__main__":
 
     root = tk.Tk()
     root.withdraw()
-    reference_image = filedialog.askopenfilename(parent=root, initialdir=initial_dir_data + '/' + project_file + '/' + folder_list[-1], title='Reference Selection')
+    reference_image = filedialog.askopenfilename(parent=root, initialdir=initial_dir_img + '/' + project_file + '/' + folder_list[-1], title='Reference Selection')
     img_reference = cv2.imread(str(reference_image))
 
     ### Resize image for ROI selection ###
